@@ -92,17 +92,6 @@ MAD-F is a **hybrid fraud detection system** that combines **rule-based checks**
 
 ---
 
-## 📥 What Will Be Provided
-- 📄 A dataset with transaction details and fraud labels (`is_fraud_reported`).
-- 📜 Sample API requests.
-
-## 🏆 Evaluation Criteria
-- ✅ Performance of the fraud detection system (**accuracy, latency, etc.**).
-- ✅ Functionality of the **dashboard and APIs**.
-- ✅ Integration of **rule-based and AI-based fraud detection**.
-
----
-
 ## ⚙️ Installation
 
 ### 📌 Prerequisites
