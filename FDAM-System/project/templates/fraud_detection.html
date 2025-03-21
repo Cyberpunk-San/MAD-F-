@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fraud Detection</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/fraud_detection">Detect Fraud</a></li>
+                    <li><a href="/fraud_reporting">Report Fraud</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="card">
+                <h2>Check if a Transaction is Fraudulent</h2>
+                <form id="fraudDetectionForm">
+                    <label for="transaction_id">Transaction ID:</label>
+                    <input type="text" id="transaction_id" name="transaction_id" required>
+                    <button type="submit" class="btn">Check Fraud</button>
+                </form>
+                <p id="result"></p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FDAM System. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+<script>
+    document.getElementById('fraudDetectionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const transactionId = document.getElementById('transaction_id').value;
+
+        fetch('/fraud-detection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ transaction_id_anonymous: transactionId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+</html>

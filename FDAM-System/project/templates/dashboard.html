@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fraud Monitoring Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/fraud_detection">Detect Fraud</a></li>
+                    <li><a href="/fraud_reporting">Report Fraud</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Filters Section -->
+            <section class="card">
+                <h2>Filter Transactions</h2>
+                <label for="dateFilter">Date:</label>
+                <input type="date" id="dateFilter">
+                <label for="payerFilter">Payer ID:</label>
+                <input type="text" id="payerFilter">
+                <label for="payeeFilter">Payee ID:</label>
+                <input type="text" id="payeeFilter">
+                <button onclick="filterData()" class="btn">Apply Filters</button>
+            </section>
+
+            <!-- Search Section -->
+            <section class="card">
+                <h2>Search Transactions</h2>
+                <input type="text" id="searchBox" placeholder="Search by Transaction ID">
+                <button onclick="searchTransaction()" class="btn">Search</button>
+            </section>
+
+            <!-- Raw Transaction Table -->
+            <section class="card">
+                <h2>Transaction Data</h2>
+                <table id="transactionTable">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Payer ID</th>
+                            <th>Payee ID</th>
+                            <th>Amount</th>
+                            <th>Channel</th>
+                            <th>Payment Mode</th>
+                            <th>Payment Gateway</th>
+                            <th>Predicted Fraud</th>
+                            <th>Reported Fraud</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be inserted dynamically -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Fraud Analysis Graphs -->
+            <section class="card">
+                <h2>Fraud Comparison by Dimensions</h2>
+                <canvas id="fraudComparisonChart"></canvas>
+            </section>
+
+            <section class="card">
+                <h2>Time Series Analysis</h2>
+                <label for="timeFrame">Select Time Frame:</label>
+                <select id="timeFrame" onchange="updateTimeSeries()">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+                <canvas id="fraudTimeSeriesChart"></canvas>
+            </section>
+
+            <!-- Evaluation Metrics -->
+            <section class="card">
+                <h2>Model Evaluation</h2>
+                <label for="evalPeriod">Select Time Period:</label>
+                <select id="evalPeriod" onchange="updateEvaluation()">
+                    <option value="7">Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                </select>
+                <div id="evaluationResults">
+                    <p><strong>Confusion Matrix:</strong> <span id="confusionMatrix"></span></p>
+                    <p><strong>Precision:</strong> <span id="precision"></span></p>
+                    <p><strong>Recall:</strong> <span id="recall"></span></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FDAM System. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
